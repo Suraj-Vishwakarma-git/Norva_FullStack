@@ -6,4 +6,4 @@ app.get("/",(req,res)=>{
     res.json({message:"Norve"});
 });
 
-export default app;
+export default app;n
