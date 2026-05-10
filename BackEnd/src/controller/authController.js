@@ -42,3 +42,37 @@ export const signup=async (req,res)=>{
     });
    }
 }
+
+
+export const login=async (req,res)=>{
+    try{
+        const {email,password}=req.body;
+        if(!email || !password ){
+            return res.json({
+                message:"All fields are required"
+            });
+        }
+        const user=await User.findOne({email});
+        if(!user){
+            return res.json({
+                message:"User Not Found"
+            });
+        }
+        const cpair=await bcrypt.compare(password,user.password);
+        if(!cpair){
+            return res.status(401).json({
+                message:"Incorrect Password"
+            });
+        }
+        const token=await jwt.sign({userId:user._id},JWT_SECRET,{expiresIn:"7d"});
+        return res.status(201).json({
+            message:"LogedIn Successfully",
+            token
+        });
+
+    }catch(e){
+        return res.status(500).json({
+            message:e.message
+        });
+    }
+}

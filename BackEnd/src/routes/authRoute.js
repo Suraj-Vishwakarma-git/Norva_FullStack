@@ -1,5 +1,5 @@
 import express from "express";
-import { signup } from "../controller/authController.js";
+import { login, signup } from "../controller/authController.js";
 
 const accountRouter=express.Router();
 
@@ -8,6 +8,9 @@ accountRouter.get("/",(req,res)=>{
         message:"Account Router Working"
     })
 });
+
+
 accountRouter.post("/signup",signup);
+accountRouter.post("/login",login);
 
 export default accountRouter;
