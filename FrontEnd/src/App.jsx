@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import './App.css'
+import LoginPage from './components/auth/LoginPage.jsx'
 
 function App() {
 
   return (
    <>
-   <h1>Hello</h1>
+   <LoginPage/>
    </>
   )
 }
